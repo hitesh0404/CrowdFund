@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from .forms import *
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 
 class Login(View):
     def get(self,request):
@@ -29,3 +29,8 @@ class Register(View):
             return redirect("login")
         else:
             return render(request,'accounts/register.html',{'form': form})
+
+
+def logout_user(request):
+    logout(request) 
+    return redirect('index')
