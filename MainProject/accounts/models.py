@@ -7,7 +7,7 @@ gender_choice = [
     ("O","Other"),
     ("N","Don't want to Mention")
 ]
-# from time import timezone
+
 class Contributor(AbstractUser):
     contact_detail = models.CharField(max_length=13,default="",null=False)
     d_o_b = models.DateField(null=False)
@@ -23,6 +23,13 @@ class Contributor(AbstractUser):
     class Meta:
         db_table = "contributor"
         
+
+class Documents(models.Model):
+    contributor = models.ForeignKey(Contributor,null=True,on_delete=models.DO_NOTHING)
+    address_proof = models.FileField(upload_to='files/documents/address_proof/',default=None,null=True)
+    address_proof_verified = models.BooleanField(default=False)
+    id_proof = models.FileField(upload_to='files/documents/id_proof/',default=None,null=True)
+    id_proof_verified = models.BooleanField(default=False)
 
 
 class Address(models.Model):

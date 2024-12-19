@@ -30,7 +30,7 @@ class MotiveType(models.TextChoices):
     OTHER = 'Other', 'Other'
 
 class Motive(models.Model):
-    id = models.UUIDField(primary_key=True,default=uuid4(),auto_created=True)
+    id = models.UUIDField(primary_key=True,default=uuid4,auto_created=True)
     name=models.CharField(max_length=40,unique=True)
     # contributor = models.ManyToManyField(Contributor,through='InitiatorGroupContributor')
     logo=models.ImageField(upload_to="image/motive/logo/")
@@ -49,7 +49,7 @@ class RoleType(models.TextChoices):
     USER = 'User','User'
 
 class Group(models.Model):
-    id = models.UUIDField(primary_key=True,default=uuid4(),auto_created=True)
+    id = models.UUIDField(primary_key=True,default=uuid4,auto_created=True)
     created_by = models.ForeignKey(Contributor,on_delete=models.DO_NOTHING)
     dp = models.ImageField(upload_to="image/group/dp/")
     name = models.CharField(max_length=50,null=False,blank=False,default=id)
@@ -59,7 +59,7 @@ class Group(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     
 class InitiatorGroupContributor(models.Model):
-    id = models.UUIDField(primary_key=True,default=uuid4(),auto_created=True)
+    id = models.UUIDField(primary_key=True,default=uuid4,auto_created=True)
     contributor = models.ForeignKey(Contributor,on_delete=models.DO_NOTHING)
     # motive = models.ForeignKey(Motive,on_delete=models.DO_NOTHING)
     group = models.ForeignKey(Group,on_delete=models.DO_NOTHING)
@@ -72,7 +72,7 @@ class InitiatorGroupContributor(models.Model):
         unique_together = ['contributor','group']
 
 class GroupContributor(models.Model):
-    id = models.UUIDField(primary_key=True,default=uuid4(),auto_created=True)
+    id = models.UUIDField(primary_key=True,default=uuid4,auto_created=True)
     contributor = models.ForeignKey(Contributor,on_delete=models.DO_NOTHING)
     # motive = models.ForeignKey(Motive,on_delete=models.DO_NOTHING)
     group = models.ForeignKey(Group,on_delete=models.DO_NOTHING)

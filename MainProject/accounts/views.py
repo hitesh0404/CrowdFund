@@ -14,7 +14,8 @@ class Login(View):
                                 password= form.cleaned_data['password'])
                 if user :
                     login(request,user)
-                    return redirect("register")
+                    next = request.GET.get('next')
+                    return redirect(next)
             return render(request,'accounts/login.html',{'form': form})
 
 class Register(View):
